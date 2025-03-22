@@ -18,9 +18,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 4
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
   <component name="ProjectId" id="2uRpdi8pgKeutm12KxkmuFPcwIo" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -31,7 +31,7 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "D:/Users/jovan/Desktop/DINCK_test/biblioteka",
+    "last_opened_file_path": "D:/Users/jovan/Desktop/DINCK_test/marketApplication",
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
   }
@@ -53,6 +53,7 @@
       <option name="presentableId" value="Default" />
       <updated>1742221330185</updated>
       <workItem from="1742221356619" duration="282000" />
+      <workItem from="1742666699210" duration="10000" />
     </task>
     <servers />
   </component>
