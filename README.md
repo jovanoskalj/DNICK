@@ -1,3 +1,43 @@
+
+public async Task<IActionResult> AddChapters(Guid bookId)
+{
+    var book = _context.Books.FirstOrDefault(b => b.Id == bookId);
+    if (book == null)
+        return NotFound();
+
+    using var client = new HttpClient();
+    var request = new { bookId = bookId.ToString() };
+    var json = JsonSerializer.Serialize(request);
+    var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+    var response = await client.PostAsync("http://is-lab4.ddns.net:8080/chapters", content);
+    if (!response.IsSuccessStatusCode)
+        return View("Error");
+
+    var result = await response.Content.ReadAsStringAsync();
+    var chaptersDto = JsonSerializer.Deserialize<List<ChapterDto>>(result, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+    var chapters = chaptersDto.Select(dto => new Chapter
+    {
+        Id = Guid.NewGuid(),
+        BookId = book.Id,
+        Title = dto.Title,
+        PageCount = dto.PageCount,
+        Summary = dto.Summary,
+        ChapterNumber = dto.ChapterNumber,
+        HasExercises = dto.HasExercises,
+        KeyConcept = dto.KeyConcept,
+        DifficultyLevel = dto.DifficultyLevel,
+        LastUpdated = dto.LastUpdated
+    }).ToList();
+
+    _context.Chapters.AddRange(chapters);
+    await _context.SaveChangesAsync();
+
+    return RedirectToAction("Details", new { id = book.Id });
+}
+
+
 public async Task<IActionResult> FetchBooks()
 {
     using var client = new HttpClient();
