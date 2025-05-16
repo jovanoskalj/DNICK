@@ -1,3 +1,34 @@
+
+@model List<BookDto>
+
+<h2>Books from External API</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>ISBN</th>
+            <th>Description</th>
+            <th>Year</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var book in Model)
+        {
+            <tr>
+                <td>@book.Name</td>
+                <td>@book.AuthorFirstName @book.AuthorLastName</td>
+                <td>@book.IsbnCode</td>
+                <td>@book.ShortDescription</td>
+                <td>@book.PublishedYear</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
 // Display Books – прикажи книги од API
 public async Task<IActionResult> DisplayBooks()
 {
