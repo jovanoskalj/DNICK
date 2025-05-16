@@ -1,4 +1,20 @@
 
+// Display Books – прикажи книги од API
+public async Task<IActionResult> DisplayBooks()
+{
+    using var client = new HttpClient();
+    var response = await client.GetAsync("http://is-lab4.ddns.net:8080/books");
+    if (!response.IsSuccessStatusCode)
+        return View("Error");
+
+    var content = await response.Content.ReadAsStringAsync();
+    var books = JsonSerializer.Deserialize<List<BookDto>>(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+    
+    return View("BooksFromApi", books);
+}
+
+
+
 @model List<BookDto>
 
 <h2>Books from External API</h2>
