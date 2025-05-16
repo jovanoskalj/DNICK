@@ -1,3 +1,30 @@
+
+
+// BookDto.cs
+public class BookDto
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public string AuthorFirstName { get; set; }
+    public string AuthorLastName { get; set; }
+    public string IsbnCode { get; set; }
+    public string ShortDescription { get; set; }
+    public int PublishedYear { get; set; }
+}
+
+// ChapterDto.cs
+public class ChapterDto
+{
+    public string Title { get; set; }
+    public int PageCount { get; set; }
+    public string Summary { get; set; }
+    public int ChapterNumber { get; set; }
+    public bool HasExercises { get; set; }
+    public string KeyConcept { get; set; }
+    public string DifficultyLevel { get; set; }
+    public DateTime LastUpdated { get; set; }
+}
+
 Даден е почетен код во кој е имплементирано едностано решение за чување податоци за книги (Book) и нивни делови (Chapter). Ваша задача е да го проширите постоечкиот проект така што ќе овозможите повици до API-то (http://is-lab4.ddns.net:8080)
 При клик на копчето Display Books на страницата /Books, ќе се направи GET повик до /books при што во ново View ќе ги излистате книгите кои ги враќа API-то со сите детали  
 При клик на копчето Fetch Books на страницата /Books, ќе се направи GET повик до /books при што книгите кои ги враќа API-то ќе ги мапирате во моделот Book и како такви ќе ги запишете во базата на податоци. Внимавајте на соодветно мапирање на атрибутите. Во моделот Book, името и презимето на авторот се чуваат конкатанирани во рамки на еден string
