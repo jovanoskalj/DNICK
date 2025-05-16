@@ -1,3 +1,32 @@
+public async Task<IActionResult> FetchBooks()
+{
+    using var client = new HttpClient();
+    var response = await client.GetAsync("http://is-lab4.ddns.net:8080/books");
+    if (!response.IsSuccessStatusCode)
+        return View("Error");
+
+    var content = await response.Content.ReadAsStringAsync();
+    var bookDtos = JsonSerializer.Deserialize<List<BookDto>>(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+    var books = bookDtos.Select(dto => new Book
+    {
+        Id = Guid.NewGuid(),
+        Title = dto.Name,
+        ISBN = dto.IsbnCode,
+        Description = dto.ShortDescription,
+        Author = $"{dto.AuthorFirstName} {dto.AuthorLastName}",
+        PublishedYear = dto.PublishedYear
+    }).ToList();
+
+    _context.Books.AddRange(books);
+    await _context.SaveChangesAsync();
+
+    return RedirectToAction("Index");
+}
+
+
+
+
 ovde
 // Display Books – прикажи книги од API
 public async Task<IActionResult> DisplayBooks()
