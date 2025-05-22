@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Repair Page</title>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}" />
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.js' %}"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'add' %}">Repairs</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" disabled>Manufacturers</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" disabled>About Us</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+{# HEADER #}
+<div style="background-image: url('{% static "slika.jpg" %}'); height: 400px; width: 100%; background-size: cover; background-position: center;">
+    <h1 class="fs-1 fw-bold ms-5 pt-5 text-white">HONEST, QUALITY WORK</h1>
+    <h1 class="fs-1 fw-light ms-5 text-white">AT AFFORDABLE PRICE</h1>
+    <h6 class="fw-light text-white ms-5" style="width: 50%">
+        We provide top-notch service for import and domestic car repairs. Servicing Brakes, Exhaust,
+        Tune Ups, Engine Repairs, Electrical and A.C Systems.
+    </h6>
+</div>
+
+<div>
+    <h5 class="fw-light d-flex justify-content-center mt-5">CARS FOR REPAIRMENT</h5>
+</div>
+
+<div class="container">
+  <div class="row">
+      {% for repair in repairs %}
+      <div class="col-md-6 col-lg-4 mb-4">
+          <div class="card bg-dark text-white shadow rounded" style="width: 100%;">
+              <img src="{{ repair.image.url }}" class="card-img-top rounded-top" alt="{{ repair.code }}" style="height: 220px; object-fit: cover;">
+              <div class="card-body">
+                  <h5 class="card-title">{{ repair.code }}</h5>
+                  <p class="card-text">{{ repair.description }}</p>
+                  <a href="#" class="btn btn-primary">Mark as repaired</a>
+              </div>
+          </div>
+      </div>
+      {% endfor %}
+  </div>
+</div>
+
+<div class="container mt-5">
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit" class="btn btn-dark mt-3">Submit</button>
+    </form>
+</div>
+
+</body>
+</html>
