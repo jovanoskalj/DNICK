@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}">
+
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand ms-5" href="#">Navbar</a>
+
+    <div class="collapse navbar-collapse d-flex justify-content-end me-5" id="navbarTogglerDemo02">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'add' %}">Add</a>
+        </li>
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<div class="container ">
+  <div class="row">
+    <div class="col mt-5">
+        <div class="d-flex justify-content-center align-items-center mt-5 fs-1">
+                TRAVEL APPLICATION
+        </div>
+    <div class="d-flex justify-content-center align-items-center ">
+               <h6 class="fs-3">Book your next trip!</h6>
+        </div>
+
+    </div>
+    <div class="col mt-5">
+        <img src="{% static 'main.jpg' %}" style="width: 450px; height: 300px"/>
+
+    </div>
+
+        <div class="row">
+
+    <div class="col mt-5">
+        <img src="{% static 'main.jpg' %}" style="width: 450px; height: 300px"/>
+
+    </div>
+  <div class="col mt-5">
+        <div class="d-flex justify-content-center align-items-center mt-5 fs-6">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. A amet consequatur corporis culpa, debitis distinctio ducimus ea error, explicabo laborum, modi nesciunt nihil odit pariatur provident quis reprehenderit suscipit voluptas!
+        </div>
+
+
+    </div>
+  </div>
+</div>
+
+</div>
+
+<div style="background-color: lightblue" class="pt-5 mt-5">
+{% for travel in travels %}
+<div class="d-flex justify-content-center ms-5 mt-5">
+
+
+    <div class="card mb-3" style="width: 540px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="{{ travel.photo.url }}" class="img-fluid rounded-start" alt="..." style="width: auto; height: 100%; object-fit: cover;" />
+
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{travel.place_name }}</h5>
+        <p class="card-text">Price: {{ travel.price }}</p>
+        <p class="card-text">Duration: {{ travel.duration }}</p>
+        <p class="card-text">Guide: {{ travel.guide }}</p>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+ {% endfor %}
+</div>
+
+</body>
+</html>
