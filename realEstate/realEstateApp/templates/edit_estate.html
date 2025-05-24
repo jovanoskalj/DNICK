@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit real estate</title>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}"/>
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.js' %}"></script>
+
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-body-tertiary bg-transparent">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Real Estate</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contacts</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Projects</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" aria-disabled="true">Services</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container text-start m-5">
+    <div class="row">
+        <div class="col mt-5 pt-5 ">
+            <h1 class="fw-bold fs-1">EDIT: {{ estate.name }}</h1>
+        </div>
+        <div class="col ">
+            <img src="{{ estate.image.url }}" style="width: 600px" alt="Photo">
+        </div>
+    </div>
+</div>
+
+<div class="py-5 d-flex justify-content-center bg-light-subtle">
+    <form method="post" action="{% url 'edit' estate_id %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Courses-Home</title>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}"/>
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.js' %}"></script>
+
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNavAltMarkup">
+            <div class="navbar-nav ">
+
+                <a class="nav-link" href="{% url 'add_course' %}">Add course</a>
+
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid"
+     style="background-image: url('{% static "header.jpg" %}'); height: 400px; width: 100%; background-size: cover;">
+
+
+    <div
+            class="row">
+
+        <div class="col-6">
+            <h1 class="fs-1 text-dark ps-5 pt-5 ms-5"> COURSES APPLICATION</h1>
+            <h6 class="fw-light text-warning-emphasis fs-4 ps-5 ms-5"> All courses on one place, for you!</h6>
+        </div>
+
+        <div class="col-4">
+
+            <h6 class="fw-light text-warning-emphasis fs-6 pt-5 mt-5"> Lorem ipsum dolor sit amet, consectetur
+                adipisicing
+                elit.
+                Ab asperiores atque autem culpa cumque debitis
+                delectus eligendi eos incidunt inventore ipsa nam nisi nostrum, pariatur quaerat sequi tempora totam
+                vitae.
+            </h6>
+        </div>
+
+
+    </div>
+</div>
+
+<div class="d-flex flex-column align-items-center mt-5 w-100">
+    {% for course in courses_list %}
+        <div class="card mb-3 w-75"> <!-- фиксна ширина за сите -->
+            <div class="row g-0">
+                <div class="col-md-4">
+                    {% if course.image %}
+                        <img src="{{ course.image.url }}" alt="{{ course.name }}"
+                             class="img-fluid h-100 w-100 rounded-start"
+                             style="object-fit: cover;">
+                    {% else %}
+                        <div class="text-center w-100 h-100 d-flex align-items-center justify-content-center bg-light rounded-start"
+                             style="min-height: 200px;">
+                            No image available
+                        </div>
+
+
+                    {% endif %}
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body h-100">
+                        <h5 class="card-title">{{ course.name }}</h5>
+                        <p class="card-text">{{ course.description }}</p>
+                          <h6>Lecturers:</h6>
+                        <ul>
+                            {% for lc in course.courselecturer_set.all %}
+                                {% if lc.lecturer %}
+                                    <li>{{ lc.lecturer.name }} {{ lc.lecturer.surname }} ({{ lc.lecturer.country }})
+                                    </li>
+                                {% endif %}
+                            {% empty %}
+                                <li>No lecturers assigned</li>
+                            {% endfor %}
+                        </ul>
+
+                        <a href="{% url 'edit_course' course.id %}" class="btn btn-success">Edit</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+
+</body>
+</html>
