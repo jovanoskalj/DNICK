@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}"/>
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.js' %}"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Hotel System</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Features</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Pricing</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div style="background-image: url('{% static "header.jpg" %}'); height: 400px;width: 100%;background-size: cover;">
+    <div class="container px-4 text-center">
+        <div class="row gx-5">
+            <div class="col-6  mt-5 pt-5">
+
+            </div>
+            <div class="col-6 mt-5 pt-5">
+                {#      <h6> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur deleniti dolorem fugit harum ipsum, iste laborum maiores, molestiae nesciunt quod saepe sequi voluptate voluptatum! Culpa doloribus explicabo ipsum ratione vero.</h6>#}
+                <h1 class="text-warning fw-bold fs-1">HOTEL RESERVATION SYSTEM</h1>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<div class="d-flex justify-content-evenly mt-5">
+    {% for reservation in reservation_list %}
+        <div class="card" style="width: 18rem;">
+            <img src="{{ reservation.ID_photo.url }}" class="card-img-top" height="200px" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{ reservation.room.room_number }}</h5>
+                <p class="card-text">{{ reservation.guest }}</p>
+                <a href="{% url 'edit' reservation.id %}" class="btn btn-primary">EDIT</a>
+                <a href="{% url 'details' reservation.id %}" class="btn btn-primary">DETAILS</a>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+</body>
+</html>

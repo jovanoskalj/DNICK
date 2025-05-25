@@ -2,6 +2,9 @@ from django import forms
 from .models import *
 
 
+
+
+
 class RealEstateForm(forms.ModelForm):
     characteristics_display = forms.CharField(
         label='Characteristics',
@@ -25,3 +28,5 @@ class RealEstateForm(forms.ModelForm):
         for field_name, field in self.fields.items():
             if not isinstance(field.widget, forms.CheckboxInput):
                 field.widget.attrs['class'] = 'form-control'
+
+

@@ -35,6 +35,8 @@ class RealEstateAdmin(admin.ModelAdmin):
         # додадено ниту една карактеристика која го опишува
         return not RealEstateCharacteristics.objects.filter(real_estate=obj).exists()
 
+    #Огласите можат да бидат менувани само од агенти кои се
+    #задолжени за продажба на тој оглас, а останатите агенги може само да ги гледаат тие огласи
     def has_change_permission(self, request, obj=None):
         return obj and RealEstateAgent.objects.filter(real_estate=obj, agent__user=request.user).exists()
 

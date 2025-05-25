@@ -52,3 +52,5 @@ class RealEstateCharacteristics(models.Model):
 
     def __str__(self):
         return f"{self.real_estate.name} - {self.characteristic}"
+
+

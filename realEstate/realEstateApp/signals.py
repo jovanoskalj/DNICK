@@ -15,3 +15,4 @@ def my_handler(sender, instance, **kwargs):
             for a in array:
                 a.agent.num_sells += 1
                 a.agent.save()
+
